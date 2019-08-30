@@ -36,18 +36,20 @@ export const writeFile = (dir, name, content) => new Promise((resolve, reject) =
 
 export const runOnTempDir = (block) => new Promise((resolve, reject) => {
     if (block) {
-        const dir = makeRuntimeTempDir()
         if (typeof block === "function") {
+            const dir = makeRuntimeTempDir()
             block(dir)
                 .then((result) => {
                     deleteDir(dir)
                     return Promise.resolve(result)
                 })
                 .then(resolve)
-                .catch(reject)
+                .catch((e) => {
+                    deleteDir(dir)
+                    reject(e)
+                })
         } else {
-            // Some invalid type
-            deleteDir(dir)
+            // Some invalid block
             reject({ message: "Callback (block) must be a function that returns a promise!" })
         }
     } else {

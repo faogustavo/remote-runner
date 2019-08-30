@@ -6,14 +6,16 @@ export default class Terminal {
     }
 
     execute(command, args = []) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             exec(`cd ${this.dir}; ${command} ${args.join(' ')}`, (exception, stdout, stderr) => {
-                if (exception) {
-                    reject(exception)
-                } else {
-                    resolve({ stdout, stderr })
-                }
+                resolve(this._buildReturn(exception, stdout, stderr))
             })
         })
     }
+
+    _buildReturn = (exception, stdout, stderr) => ({
+        stdout: stdout || '', 
+        stderr: stderr || '', 
+        exception: exception || '',
+    })
 }

@@ -1,9 +1,9 @@
 import GenericRunner from './GenericRunner'
 
-const COMMAND_NAME = 'node'
-const FILE_NAME = 'code.js'
+const COMMAND_NAME = "ruby"
+const FILE_NAME = "code.rb"
 
-export default class NodeRunner extends GenericRunner {
+export default class RubyRunner extends GenericRunner {
     constructor() {
         super(COMMAND_NAME, FILE_NAME)
     }
