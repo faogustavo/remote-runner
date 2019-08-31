@@ -34,6 +34,13 @@ export const writeFile = (dir, name, content) => new Promise((resolve, reject) =
     })
 })
 
+export const filesFromDir = (dir) => new Promise((resolve, reject) => {
+    fs.readdir(dir, (err, files) => {
+        if (err) return resolve([])
+        else return resolve(files)
+    })
+})
+
 export const runOnTempDir = (block) => new Promise((resolve, reject) => {
     if (block) {
         if (typeof block === "function") {
@@ -50,9 +57,9 @@ export const runOnTempDir = (block) => new Promise((resolve, reject) => {
                 })
         } else {
             // Some invalid block
-            reject({ message: "Callback (block) must be a function that returns a promise!" })
+            reject({ error: "Callback (block) must be a function that returns a promise!" })
         }
     } else {
-        reject({ message: "You must provide a callback (block)" })
+        reject({ error: "You must provide a callback (block)" })
     }
 })
