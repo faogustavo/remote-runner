@@ -1,9 +1,12 @@
 import { getAllVersions, getVersion, runnerForLang } from '../utils/RunnerUtils'
 
+// Actions
 const VERSIONS = 'getVersions'
 const VERSION = 'getVersion'
-const LANG = 'lang'
 const RUN = 'run'
+
+// Attributes
+const LANG = 'lang'
 const CODE = 'code'
 
 export default class Connection {
@@ -29,6 +32,7 @@ export default class Connection {
         break
       case RUN:
         this._run(data[LANG], data[CODE])
+        break
     }
   }
 
