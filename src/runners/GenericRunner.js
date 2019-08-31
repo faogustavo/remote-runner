@@ -9,6 +9,8 @@ export default class GenericRunner {
 
     run = (code) => FileManager.runOnTempDir(this._run(code))
 
+    version = (terminal) =>  terminal.execute(this.command, [ '-v' ])
+
     _run = (code) => (dir) => {
         const terminal = new Terminal(dir);
         return FileManager.writeFile(dir, this.file, code)

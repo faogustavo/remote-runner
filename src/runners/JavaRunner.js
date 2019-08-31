@@ -6,7 +6,11 @@ const EXECUTE_COMMAND = 'java'
 const FILE_NAME = 'code.java'
 
 export default class JavaRunner {
+    identificationName = 'java'
+
     run = (code) => FileManager.runOnTempDir(this._run(code))
+
+    version = (terminal) => terminal.execute(EXECUTE_COMMAND, [ '-version' ])
 
     _run = (code) => (dir) => {
         const terminal = new Terminal(dir);

@@ -1,7 +1,7 @@
 import { exec } from 'child_process'
 
 export default class Terminal {
-    constructor(dir) {
+    constructor(dir = '.') {
         this.dir = dir
     }
 

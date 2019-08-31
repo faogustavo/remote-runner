@@ -7,7 +7,11 @@ const FILE_NAME = 'code.kt'
 const OUTPUT_FILE_NAME = 'code.jar'
 
 export default class KotlinRunner {
+    identificationName = 'kotlin'
+
     run = (code) => FileManager.runOnTempDir(this._run(code))
+
+    version = (terminal) =>  terminal.execute(COMPILE_COMMAND, [ '-version' ])
 
     _run = (code) => (dir) => {
         const terminal = new Terminal(dir);

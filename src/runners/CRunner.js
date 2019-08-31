@@ -6,7 +6,11 @@ const FILE_NAME = 'code.c'
 const OUTPUT_FILE_NAME = 'Code'
 
 export default class CRunner {
+    identificationName = 'c'
+
     run = (code) => FileManager.runOnTempDir(this._run(code))
+
+    version = (terminal) =>  terminal.execute(COMMAND_NAME, [ '-v' ])
 
     _run = (code) => (dir) => {
         const terminal = new Terminal(dir);
