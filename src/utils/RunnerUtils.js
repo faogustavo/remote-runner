@@ -56,7 +56,7 @@ export const getAllVersions = () => {
     new CRunner(),
     new JavaRunner(),
     new KotlinRunner(),
-  ].map(versionPromise.bind(terminal))
+  ].map((runner) => versionPromise(terminal, runner))
 
   return Promise.all(versions)
     .then((results) => results.reduce(

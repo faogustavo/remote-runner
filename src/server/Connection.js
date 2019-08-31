@@ -14,7 +14,12 @@ export default class Connection {
   }
 
   _onMessage = (message) => {
-    const data = JSON.parse(message)
+    let data;
+    try {
+      data = JSON.parse(message)
+    } catch (e) {
+      return console.warn(e)
+    }
     switch (data.action) {
       case VERSION:
         this._getVersion(data[LANG])
@@ -23,7 +28,7 @@ export default class Connection {
         this._getVersions()
         break
       case RUN:
-        this._run(data[LANG],  data[CODE])
+        this._run(data[LANG], data[CODE])
     }
   }
 
@@ -33,8 +38,8 @@ export default class Connection {
 
   _resolveAndSend = (promise, sendError = false) => {
     promise
-    .then(this._send)
-    .catch(sendError ? this._send : console.warn)
+      .then(this._send)
+      .catch(sendError ? this._send : console.warn)
   }
 
   _getVersion = (lang) => this._resolveAndSend(getVersion(lang), true)
